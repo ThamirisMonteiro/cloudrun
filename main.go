@@ -1,8 +1,11 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -12,11 +15,9 @@ func main() {
 		err := validateCEP(cep)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusUnprocessableEntity)
-			_, err := w.Write([]byte("invalid zipcode"))
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-			}
+			return
 		}
+
 		err, result := handleCEP(cep)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -39,6 +40,11 @@ func main() {
 }
 
 func validateCEP(cep string) error {
+	re := regexp.MustCompile(`^\d{8}$`)
+	fmt.Println(re)
+	if !re.MatchString(cep) {
+		return errors.New("invalid zipcode")
+	}
 	return nil
 }
 

@@ -3,16 +3,16 @@
 ## 1. Planejamento e Configuração do Ambiente
 - [x] Criar o servidor HTTP básico em Go.
 - [x] Configurar Dockerfile para build e execução no Google Cloud Run.
-- [] Configurar `docker-compose` para facilitar testes locais.
+- [X] Configurar `docker-compose` para facilitar testes locais.
 
 ---
 
 ## 2. Desenvolvimento da Aplicação
 ### 2.1. Endpoint para CEP
 - [x] Criar endpoint HTTP básico para receber o CEP.
-- [ ] Adicionar validação para o CEP (8 dígitos e apenas números).
+- [X] Adicionar validação para o CEP (8 dígitos e apenas números).
 - [ ] Tratar cenários de erro:
-    - [ ] Retornar HTTP 422 para CEP inválido.
+    - [X] Retornar HTTP 422 para CEP inválido.
     - [ ] Retornar HTTP 404 caso o CEP não seja encontrado na API ViaCEP.
 
 ### 2.2. Consulta à API ViaCEP
