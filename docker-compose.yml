@@ -8,3 +8,14 @@ services:
     ports:
       - "8080:8080"
     entrypoint: ["/cloudrun"]
+
+  tests:
+    image: "golang:1.19"
+    container_name: test
+    working_dir: /app
+    command: [ "go", "test", "./..." ]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app

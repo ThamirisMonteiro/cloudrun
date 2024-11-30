@@ -3,7 +3,7 @@
 ## 1. Planejamento e Configuração do Ambiente
 - [x] Criar o servidor HTTP básico em Go.
 - [x] Configurar Dockerfile para build e execução no Google Cloud Run.
-- [ ] Configurar `docker-compose` para facilitar testes locais.
+- [] Configurar `docker-compose` para facilitar testes locais.
 
 ---
 
