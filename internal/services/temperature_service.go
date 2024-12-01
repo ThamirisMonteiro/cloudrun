@@ -3,9 +3,12 @@ package services
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/joho/godotenv"
 	"io/ioutil"
+	"log"
 	"math"
 	"net/http"
+	"os"
 )
 
 type WeatherAPIResponse struct {
@@ -14,10 +17,19 @@ type WeatherAPIResponse struct {
 	} `json:"current"`
 }
 
-var WeatherAPIKey = "f4325b77228346ef861132533240112"
-
 func GetTemperature(location string) (string, error) {
-	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?key=%s&q=%s", WeatherAPIKey, location)
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Erro ao carregar o arquivo .env")
+	}
+
+	// Pega a chave de API do ambiente
+	weatherAPIKey := os.Getenv("WEATHER_API_KEY")
+	if weatherAPIKey == "" {
+		log.Fatal("A chave de API não foi definida em WEATHER_API_KEY")
+	}
+
+	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?key=%s&q=%s", weatherAPIKey, location)
 
 	resp, err := http.Get(url)
 	if err != nil {

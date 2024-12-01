@@ -1,21 +1,55 @@
-## 4. Deploy no Google Cloud Run
-- [x] Configurar Dockerfile para produção.
-- [ ] Criar conta no Google Cloud e configurar o projeto.
-- [ ] Realizar o deploy no Google Cloud Run (Free Tier).
-- [ ] Testar o endpoint no ambiente de produção.
+# Projeto de Clima e CEP
 
----
+Este projeto é uma aplicação em Go que recebe um CEP, encontra a cidade correspondente e retorna o clima atual, com a temperatura nas escalas Celsius, Fahrenheit e Kelvin.
 
-## 5. Documentação
-- [ ] Criar um `README.md` com instruções para rodar o projeto:
-    - Localmente.
-    - Com Docker.
-    - Endpoint de produção no Google Cloud Run.
-- [ ] Documentar as dependências e como obter as chaves de API.
+## 0. Configuração
+### **WeatherAPI**:
+- Crie uma conta em [https://www.weatherapi.com/](https://www.weatherapi.com/) para obter uma chave de API gratuita.
+- Após criar sua conta, obtenha sua chave no painel de controle da API.
+- Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+- WEATHER_API_KEY=your_weatherapi_key
 
----
+## 1. Rodando o projeto localmente
 
-## 6. Entrega
-- [X] Compartilhar o repositório com o código-fonte.
-- [ ] Informar o link do endpoint publicado no Google Cloud Run.
-- [ ] Adicionar exemplos de requisições no `README.md`.
+```bash
+go run main.go
+```
+
+#### para testar, utilizar endereço como localhost:8080
+
+## 2. Rodando o Projeto com Docker
+
+### 2.a. Rodar os testes
+```bash
+docker compose up tests
+```
+
+### 2.b. Rodar a aplicação
+```bash
+ docker compose up app
+ ```
+
+#### para testar, utilizar endereço como localhost:8080
+
+## 3. Rodando o Projeto com Google Cloud Run
+### Endereço para acessar a API:
+```bash
+https://lab-cloud-run-uztcvktcmq-uc.a.run.app/
+```
+
+## 4. Exemplos de requisições
+
+### 4.a. CEP válido
+```bash
+<endereço>/80035050
+```
+
+### 4.b. CEP inválido
+```bash
+<endereço>/8003505a
+```
+
+### 4.c. CEP inexistente
+```bash
+<endereço>/12345678
+```
