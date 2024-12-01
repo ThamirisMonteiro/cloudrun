@@ -16,7 +16,7 @@
     - [ ] Retornar HTTP 404 caso o CEP não seja encontrado na API ViaCEP.
 
 ### 2.2. Consulta à API ViaCEP
-- [ ] Implementar função para consultar a API ViaCEP.
+- [X] Implementar função para consultar a API ViaCEP.
 - [ ] Extrair o nome da cidade e estado a partir da resposta da API.
 - [ ] Tratar erros da API ViaCEP.
 
