@@ -7,7 +7,7 @@ import (
 )
 
 func CEPHandler(w http.ResponseWriter, r *http.Request) {
-	cep := r.URL.Path[1:] // Remove a barra inicial
+	cep := r.URL.Path[1:]
 	err := utils.ValidateCEP(cep)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusUnprocessableEntity)
