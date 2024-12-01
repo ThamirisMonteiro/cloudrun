@@ -3,13 +3,17 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"regexp"
 	"strings"
 )
+
+type viacepResponse struct {
+	Localidade string `json:"localidade"`
+	Estado     string `json:"estado"`
+}
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -24,7 +28,7 @@ func main() {
 		if err != nil {
 			http.Error(w, err.Error(), status)
 		}
-		_, err = w.Write([]byte(result))
+		_, err = w.Write([]byte(result.Localidade + " - " + result.Estado))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
@@ -43,19 +47,23 @@ func main() {
 
 func validateCEP(cep string) error {
 	re := regexp.MustCompile(`^\d{8}$`)
-	fmt.Println(re)
 	if !re.MatchString(cep) {
 		return errors.New("invalid zipcode")
 	}
 	return nil
 }
 
-func handleCEP(cep string) (error, string, int) {
+func handleCEP(cep string) (error, *viacepResponse, int) {
 	result, err, status := checkViaCEP(cep)
 	if err != nil {
-		return err, "", status
+		return err, nil, status
 	}
-	return nil, result, status
+	response := &viacepResponse{}
+	err = json.Unmarshal([]byte(result), &response)
+	if err != nil {
+		return err, nil, http.StatusInternalServerError
+	}
+	return nil, response, status
 }
 
 func checkViaCEP(cep string) (string, error, int) {

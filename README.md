@@ -11,14 +11,14 @@
 ### 2.1. Endpoint para CEP
 - [x] Criar endpoint HTTP básico para receber o CEP.
 - [X] Adicionar validação para o CEP (8 dígitos e apenas números).
-- [ ] Tratar cenários de erro:
+- [X] Tratar cenários de erro:
     - [X] Retornar HTTP 422 para CEP inválido.
-    - [ ] Retornar HTTP 404 caso o CEP não seja encontrado na API ViaCEP.
+    - [X] Retornar HTTP 404 caso o CEP não seja encontrado na API ViaCEP.
 
 ### 2.2. Consulta à API ViaCEP
 - [X] Implementar função para consultar a API ViaCEP.
-- [ ] Extrair o nome da cidade e estado a partir da resposta da API.
-- [ ] Tratar erros da API ViaCEP.
+- [X] Extrair o nome da cidade e estado a partir da resposta da API.
+- [X] Tratar erros da API ViaCEP.
 
 ### 2.3. Consulta à API WeatherAPI
 - [ ] Implementar função para consultar a API WeatherAPI com base na localização obtida.
@@ -66,6 +66,6 @@
 ---
 
 ## 6. Entrega
-- [ ] Compartilhar o repositório com o código-fonte.
+- [X] Compartilhar o repositório com o código-fonte.
 - [ ] Informar o link do endpoint publicado no Google Cloud Run.
 - [ ] Adicionar exemplos de requisições no `README.md`.
