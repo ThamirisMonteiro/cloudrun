@@ -10,9 +10,17 @@ import (
 	"strings"
 )
 
+var key = "f4325b77228346ef861132533240112"
+
 type viacepResponse struct {
 	Localidade string `json:"localidade"`
 	Estado     string `json:"estado"`
+}
+
+type weatherapiResponse struct {
+	Current struct {
+		TempC float64 `json:"temp_c"`
+	} `json:"current"`
 }
 
 func main() {
@@ -28,7 +36,13 @@ func main() {
 		if err != nil {
 			http.Error(w, err.Error(), status)
 		}
-		_, err = w.Write([]byte(result.Localidade + " - " + result.Estado))
+
+		temp, err := getTemperature(result.Localidade)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		_, err = w.Write([]byte(temp))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
@@ -43,6 +57,47 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func getTemperature(localidade string) (string, error) {
+	url := "https://api.weatherapi.com/v1/current.json?key=" + key + "&q=" + localidade
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+	if err != nil {
+		return "", err
+	}
+
+	res, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return "", err
+	}
+
+	response := &weatherapiResponse{}
+	err = json.Unmarshal(body, &response)
+
+	tempF := response.Current.TempC*1.8 + 32
+	tempK := response.Current.TempC + 273
+
+	temperature := map[string]float64{
+		"temp_C": response.Current.TempC,
+		"temp_F": tempF,
+		"temp_K": tempK,
+	}
+
+	temperatureJSON, err := json.Marshal(temperature)
+	if err != nil {
+		return "", err
+	}
+
+	return string(temperatureJSON), nil
 }
 
 func validateCEP(cep string) error {

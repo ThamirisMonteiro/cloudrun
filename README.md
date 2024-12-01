@@ -21,18 +21,18 @@
 - [X] Tratar erros da API ViaCEP.
 
 ### 2.3. Consulta à API WeatherAPI
-- [ ] Implementar função para consultar a API WeatherAPI com base na localização obtida.
-- [ ] Obter temperatura em graus Celsius.
-- [ ] Tratar erros da API WeatherAPI.
+- [X] Implementar função para consultar a API WeatherAPI com base na localização obtida.
+- [X] Obter temperatura em graus Celsius.
+- [X] Tratar erros da API WeatherAPI.
 
 ### 2.4. Conversões de Temperatura
-- [ ] Implementar função para converter de Celsius para Fahrenheit.
-- [ ] Implementar função para converter de Celsius para Kelvin.
+- [X] Implementar função para converter de Celsius para Fahrenheit.
+- [X] Implementar função para converter de Celsius para Kelvin.
 
 ### 2.5. Resposta da API
-- [ ] Formatar resposta JSON para sucesso:
+- [X] Formatar resposta JSON para sucesso:
     - Exemplo: { "temp_C": 28.5, "temp_F": 83.3, "temp_K": 301.65 }
-- [ ] Implementar retorno de erros apropriados:
+- [X] Implementar retorno de erros apropriados:
     - HTTP 422: {"message": "invalid zipcode"}
     - HTTP 404: {"message": "can not find zipcode"}
 
