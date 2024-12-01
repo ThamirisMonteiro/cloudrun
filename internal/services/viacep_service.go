@@ -9,7 +9,7 @@ import (
 
 type ViaCEPResponse struct {
 	Localidade string `json:"localidade"`
-	UF         string `json:"uf"`
+	Estado     string `json:"estado"`
 }
 
 func GetLocationFromCEP(cep string) (*ViaCEPResponse, error, int) {
@@ -22,7 +22,7 @@ func GetLocationFromCEP(cep string) (*ViaCEPResponse, error, int) {
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
+	if err != nil || resp.StatusCode != http.StatusOK {
 		return nil, err, http.StatusInternalServerError
 	}
 
