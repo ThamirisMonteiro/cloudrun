@@ -39,12 +39,12 @@
 ---
 
 ## 3. Testes Automatizados
-- [ ] Implementar testes unitários para as funções:
+- [X] Implementar testes unitários para as funções:
     - Validação do CEP.
     - Consulta à API ViaCEP.
     - Consulta à API WeatherAPI.
     - Conversões de temperatura.
-- [ ] Implementar testes de integração para o endpoint HTTP.
+- [X] Implementar testes de integração para o endpoint HTTP.
 
 ---
 
