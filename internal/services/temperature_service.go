@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math"
 	"net/http"
 )
 
@@ -38,8 +39,12 @@ func GetTemperature(location string) (string, error) {
 	tempF := response.Current.TempC*1.8 + 32
 	tempK := response.Current.TempC + 273.15
 
+	tempC := math.Round(response.Current.TempC*10) / 10
+	tempF = math.Round(tempF*10) / 10
+	tempK = math.Round(tempK*10) / 10
+
 	temperature := map[string]float64{
-		"temp_C": response.Current.TempC,
+		"temp_C": tempC,
 		"temp_F": tempF,
 		"temp_K": tempK,
 	}
